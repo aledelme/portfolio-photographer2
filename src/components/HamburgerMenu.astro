@@ -1,10 +1,10 @@
 ---
 const links = [
-  { href: "/", label: "Inicio" },
-  { href: "/en-la-obra", label: "En la obra" },
-  { href: "/en-el-cafe", label: "En el café" },
-  { href: "/en-la-vida", label: "En la vida" },
-  { href: "/contacto", label: "Contacto" },
+  // { href: "/", label: "inicio" },
+  { href: "/en-la-obra", label: "en la obra" },
+  { href: "/en-el-cafe", label: "en el café" },
+  { href: "/en-la-vida", label: "en la vida" },
+  { href: "/contacto", label: "contacto" },
 ];
 
 const current = Astro.url.pathname.replace(/\/$/, "") || "/";
@@ -31,12 +31,14 @@ const current = Astro.url.pathname.replace(/\/$/, "") || "/";
   aria-hidden="true"
   data-menu
 >
-  <img
-    src="/hero-name-white.png"
-    alt=""
-    class="menu-overlay__brand"
-    aria-hidden="true"
-  />
+  <a href="/" aria-label="Inicio">
+    <img
+      src="/hero-name-white.png"
+      alt=""
+      class="menu-overlay__brand"
+      aria-hidden="true"
+    />
+  </a>
   <div class="menu-overlay__nav">
     {
       links.map((link) => {

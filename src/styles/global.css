@@ -8,8 +8,9 @@
   --overlay: rgba(20, 16, 12, 0.96);
   --inverted: #f5f0e8;
 
-  --font-sans: "Helvetica Neue", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Arial, sans-serif;
+  --font-sans:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif;
   --font-serif: Georgia, "Times New Roman", "Cormorant Garamond", serif;
 
   --max-w: 1600px;
@@ -122,7 +123,9 @@ main {
   justify-content: center;
   z-index: 1000;
   color: var(--text);
-  transition: background var(--t-med) var(--ease), color var(--t-med) var(--ease);
+  transition:
+    background var(--t-med) var(--ease),
+    color var(--t-med) var(--ease);
 }
 
 .hamburger:focus-visible {
@@ -149,7 +152,9 @@ main {
   background: currentColor;
   border-radius: 2px;
   transform-origin: center;
-  transition: top var(--t-med) var(--ease), transform var(--t-med) var(--ease),
+  transition:
+    top var(--t-med) var(--ease),
+    transform var(--t-med) var(--ease),
     background var(--t-med) var(--ease);
 }
 
@@ -192,16 +197,20 @@ main {
   opacity: 0;
   visibility: hidden;
   transform: translateY(-1.5rem);
-  transition: opacity var(--t-med) var(--ease),
-    transform var(--t-med) var(--ease), visibility 0s linear var(--t-med);
+  transition:
+    opacity var(--t-med) var(--ease),
+    transform var(--t-med) var(--ease),
+    visibility 0s linear var(--t-med);
 }
 
 .menu-overlay.is-open {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  transition: opacity var(--t-med) var(--ease),
-    transform var(--t-med) var(--ease), visibility 0s linear 0s;
+  transition:
+    opacity var(--t-med) var(--ease),
+    transform var(--t-med) var(--ease),
+    visibility 0s linear 0s;
 }
 
 .menu-overlay__brand {
@@ -216,7 +225,7 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 .menu-overlay__link {
@@ -225,11 +234,13 @@ main {
   letter-spacing: 0.02em;
   position: relative;
   padding: 0.25rem 0.5rem;
-  font-style: italic;
+  font-style: normal;
   transform: translateY(12px);
   opacity: 0;
-  transition: opacity var(--t-med) var(--ease),
-    transform var(--t-med) var(--ease), color var(--t-fast) var(--ease);
+  transition:
+    opacity var(--t-med) var(--ease),
+    transform var(--t-med) var(--ease),
+    color var(--t-fast) var(--ease);
 }
 
 .menu-overlay.is-open .menu-overlay__link {
@@ -264,7 +275,8 @@ main {
   opacity: 0;
   transform: scaleX(0.4);
   transform-origin: left;
-  transition: opacity var(--t-fast) var(--ease),
+  transition:
+    opacity var(--t-fast) var(--ease),
     transform var(--t-fast) var(--ease);
 }
 
@@ -313,7 +325,8 @@ body.menu-open {
   cursor: zoom-in;
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity var(--t-slow) var(--ease),
+  transition:
+    opacity var(--t-slow) var(--ease),
     transform var(--t-slow) var(--ease);
   will-change: opacity, transform;
   transition-delay: var(--delay, 0ms);
@@ -328,7 +341,9 @@ body.menu-open {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.9s var(--ease), filter 0.6s var(--ease);
+  transition:
+    transform 0.9s var(--ease),
+    filter 0.6s var(--ease);
   filter: saturate(0.95);
 }
 
@@ -372,14 +387,17 @@ body.menu-open {
   padding: 2.5rem 1rem 1rem;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--t-med) var(--ease),
+  transition:
+    opacity var(--t-med) var(--ease),
     visibility 0s linear var(--t-med);
 }
 
 .lightbox.is-open {
   opacity: 1;
   visibility: visible;
-  transition: opacity var(--t-med) var(--ease), visibility 0s linear 0s;
+  transition:
+    opacity var(--t-med) var(--ease),
+    visibility 0s linear 0s;
 }
 
 .lightbox__img {
