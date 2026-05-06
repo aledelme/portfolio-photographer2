@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PhotoGrid from "../components/PhotoGrid.astro";
+import { parseImageGlob } from "../utils/parseImage.js";
+
+const images = parseImageGlob(
+  import.meta.glob("/src/images/life/*.{jpeg,jpg}", { eager: true }),
+);
+---
+
+<BaseLayout
+  title="En la vida · Fotografía cotidiana"
+  description="Fotografía de la vida cotidiana, momentos espontáneos y mirada autoral."
+>
+  <PhotoGrid images={images} />
+</BaseLayout>

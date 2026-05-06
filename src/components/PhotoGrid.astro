@@ -1,0 +1,76 @@
+---
+import { Image, getImage } from "astro:assets";
+
+interface PhotoItem {
+  order: number;
+  size: "square" | "wide" | "tall" | "large";
+  alt: string;
+  src: ImageMetadata;
+  path: string;
+}
+
+interface Props {
+  images: PhotoItem[];
+}
+
+const { images } = Astro.props;
+
+const enriched = await Promise.all(
+  images.map(async (img) => ({
+    ...img,
+    full: await getImage({
+      src: img.src,
+      format: "webp",
+      quality: 86,
+      width: Math.min(img.src.width, 1800),
+    }),
+  })),
+);
+---
+
+<section class="photo-grid">
+  {
+    enriched.map((img, i) => (
+      <button
+        type="button"
+        class={`photo-item photo-item--${img.size}`}
+        data-photo
+        data-full={img.full.src}
+        data-alt={img.alt}
+        aria-label={`Ampliar imagen: ${img.alt}`}
+        style={`--delay: ${(i % 8) * 50}ms`}
+      >
+        <Image
+          src={img.src}
+          alt={img.alt}
+          format="webp"
+          quality={80}
+          widths={[400, 700, 1100]}
+          sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          loading={i < 6 ? "eager" : "lazy"}
+        />
+      </button>
+    ))
+  }
+</section>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>(".photo-item");
+
+  if ("IntersectionObserver" in window && items.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -8% 0px" },
+    );
+    items.forEach((el) => observer.observe(el));
+  } else {
+    items.forEach((el) => el.classList.add("is-visible"));
+  }
+</script>

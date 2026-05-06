@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+
+const contactGlob = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/images/contact/*.{jpeg,jpg}",
+  { eager: true },
+);
+
+const contactImages = Object.entries(contactGlob)
+  .map(([path, mod]) => ({ src: mod.default, path }))
+  .sort((a, b) => a.path.localeCompare(b.path));
+
+const email = "alejandro.delmedico@mediasmart.es";
+const phone = "+34 600 000 000";
+const phoneHref = "tel:+34600000000";
+const instagramUrl = "https://instagram.com/";
+---
+
+<BaseLayout
+  title="Contacto · Portfolio"
+  description="Contacta para colaboraciones de fotografía, dirección visual y gestión estética de redes sociales."
+  bodyClass="no-scroll"
+>
+  <section class="contact" aria-label="Contacto">
+    {
+      contactImages.map((img, i) => (
+        <div class="scatter" aria-hidden="true">
+          <Image
+            src={img.src}
+            alt=""
+            format="webp"
+            quality={78}
+            widths={[300, 500]}
+            sizes="30vmin"
+            loading={i < 2 ? "eager" : "lazy"}
+          />
+        </div>
+      ))
+    }
+
+    <div class="contact__inner">
+      <h1 class="contact__slogan">
+        Convirtamos tu intención en algo que el mundo pueda ver.
+      </h1>
+      <p class="contact__sub">
+        <strong>Concepto, captura y estrategia</strong>
+        Acompaño tu visión mediante fotografía, dirección visual y la gestión
+        estética de tus redes sociales.
+      </p>
+      <div class="contact__details">
+        <a href={`mailto:${email}`}>{email}</a>
+        <a href={phoneHref}>{phone}</a>
+        <a
+          class="ig"
+          href={instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none"
+            ></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

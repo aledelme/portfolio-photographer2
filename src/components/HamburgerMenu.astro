@@ -1,0 +1,89 @@
+---
+const links = [
+  { href: "/", label: "Inicio" },
+  { href: "/en-la-obra", label: "En la obra" },
+  { href: "/en-el-cafe", label: "En el café" },
+  { href: "/en-la-vida", label: "En la vida" },
+  { href: "/contacto", label: "Contacto" },
+];
+
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<button
+  class="hamburger"
+  type="button"
+  aria-label="Abrir menú"
+  aria-expanded="false"
+  aria-controls="site-menu"
+  data-hamburger
+>
+  <span class="hamburger__lines" aria-hidden="true">
+    <span class="hamburger__bar"></span>
+    <span class="hamburger__bar"></span>
+    <span class="hamburger__bar"></span>
+  </span>
+</button>
+
+<nav
+  id="site-menu"
+  class="menu-overlay"
+  aria-hidden="true"
+  data-menu
+>
+  <img
+    src="/hero-name-white.png"
+    alt=""
+    class="menu-overlay__brand"
+    aria-hidden="true"
+  />
+  <div class="menu-overlay__nav">
+    {
+      links.map((link) => {
+        const linkPath = link.href.replace(/\/$/, "") || "/";
+        const isCurrent = linkPath === current;
+        return (
+          <a
+            href={link.href}
+            class="menu-overlay__link"
+            aria-current={isCurrent ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        );
+      })
+    }
+  </div>
+</nav>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>("[data-hamburger]");
+  const menu = document.querySelector<HTMLElement>("[data-menu]");
+
+  if (btn && menu) {
+    const setOpen = (open: boolean) => {
+      btn.classList.toggle("is-open", open);
+      menu.classList.toggle("is-open", open);
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      menu.setAttribute("aria-hidden", String(!open));
+      document.body.classList.toggle("menu-open", open);
+    };
+
+    btn.addEventListener("click", () => {
+      setOpen(!btn.classList.contains("is-open"));
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && btn.classList.contains("is-open")) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+
+    // Close after a link click (helps with same-page anchors / SPA-ish feel)
+    menu.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => setOpen(false)),
+    );
+  }
+</script>

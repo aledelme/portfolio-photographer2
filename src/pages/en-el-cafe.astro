@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PhotoGrid from "../components/PhotoGrid.astro";
+import { parseImageGlob } from "../utils/parseImage.js";
+
+const images = parseImageGlob(
+  import.meta.glob("/src/images/coffee/*.{jpeg,jpg}", { eager: true }),
+);
+---
+
+<BaseLayout
+  title="En el café · Fotografía de café de especialidad"
+  description="Fotografía dedicada al café de especialidad, baristas y rituales de cafetería."
+>
+  <PhotoGrid images={images} />
+</BaseLayout>

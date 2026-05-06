@@ -1,0 +1,58 @@
+---
+---
+
+<div class="lightbox" data-lightbox aria-hidden="true" role="dialog" aria-modal="true" aria-label="Vista ampliada">
+  <button class="lightbox__close" type="button" aria-label="Cerrar" data-lightbox-close>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <line x1="5" y1="5" x2="19" y2="19"></line>
+      <line x1="19" y1="5" x2="5" y2="19"></line>
+    </svg>
+  </button>
+  <img class="lightbox__img" alt="" data-lightbox-img />
+</div>
+
+<script>
+  const lightbox = document.querySelector<HTMLElement>("[data-lightbox]");
+  const lightboxImg = document.querySelector<HTMLImageElement>("[data-lightbox-img]");
+  const closeBtn = document.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+
+  if (lightbox && lightboxImg && closeBtn) {
+    const open = (src: string, alt: string) => {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("menu-open");
+      closeBtn.focus();
+    };
+
+    const close = () => {
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("menu-open");
+      // delay clearing src so transition is smooth
+      window.setTimeout(() => {
+        if (!lightbox.classList.contains("is-open")) {
+          lightboxImg.src = "";
+        }
+      }, 500);
+    };
+
+    document.addEventListener("click", (e) => {
+      const target = (e.target as HTMLElement).closest<HTMLElement>("[data-photo]");
+      if (!target) return;
+      const src = target.dataset.full;
+      const alt = target.dataset.alt ?? "";
+      if (src) open(src, alt);
+    });
+
+    closeBtn.addEventListener("click", close);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lightbox.classList.contains("is-open")) close();
+    });
+  }
+</script>

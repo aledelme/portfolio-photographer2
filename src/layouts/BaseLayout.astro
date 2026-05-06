@@ -1,0 +1,54 @@
+---
+import HamburgerMenu from "../components/HamburgerMenu.astro";
+import Lightbox from "../components/Lightbox.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  bodyClass?: string;
+}
+
+const {
+  title = "Portfolio · Fotografía de interiorismo y café de especialidad",
+  description = "Portfolio de fotografía especializada en interiorismo, arquitectura y café de especialidad.",
+  bodyClass = "",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#f5f0e8" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title}</title>
+  </head>
+  <body class={bodyClass}>
+    <header class="hero-name">
+      <a href="/" aria-label="Inicio">
+        <img
+          src="/hero-name-black.png"
+          alt={title}
+          width="340"
+          height="96"
+          decoding="async"
+        />
+      </a>
+    </header>
+
+    <HamburgerMenu />
+
+    <main>
+      <slot />
+    </main>
+
+    <Lightbox />
+  </body>
+</html>

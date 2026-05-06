@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PhotoGrid from "../components/PhotoGrid.astro";
+import { parseImageGlob } from "../utils/parseImage.js";
+
+const images = parseImageGlob(
+  import.meta.glob("/src/images/architecture/*.{jpeg,jpg}", { eager: true }),
+);
+---
+
+<BaseLayout
+  title="En la obra · Fotografía de interiorismo"
+  description="Fotografía de interiorismo, arquitectura y dirección visual de espacios."
+>
+  <PhotoGrid images={images} />
+</BaseLayout>
