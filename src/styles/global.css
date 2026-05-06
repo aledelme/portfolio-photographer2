@@ -77,7 +77,7 @@ button {
   width: auto;
   height: auto;
   max-width: 280px;
-  max-height: 80px;
+  max-height: 70px;
   object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;
@@ -88,8 +88,8 @@ button {
     padding: 2.5rem 2rem 1.5rem;
   }
   .hero-name img {
-    max-width: 340px;
-    max-height: 96px;
+    max-width: 280px;
+    max-height: 70px;
   }
 }
 
@@ -448,6 +448,10 @@ body.menu-open {
 /* ---------- Contact page ---------- */
 body.no-scroll {
   overflow: hidden;
+}
+
+body.no-scroll main {
+  padding: 0;
 }
 
 .contact {
