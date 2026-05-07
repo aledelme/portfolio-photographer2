@@ -574,15 +574,15 @@ body.no-scroll main {
 }
 
 .scatter:nth-child(1) {
-  top: -4%;
-  left: -6%;
+  top: 0%;
+  left: -2%;
   width: 32vmin;
   height: 26vmin;
   transform: rotate(-7deg);
   animation-delay: 0.1s;
 }
 .scatter:nth-child(2) {
-  top: 8%;
+  top: 2%;
   right: -5%;
   width: 26vmin;
   height: 32vmin;
@@ -590,7 +590,7 @@ body.no-scroll main {
   animation-delay: 0.25s;
 }
 .scatter:nth-child(3) {
-  bottom: 10%;
+  bottom: 20%;
   left: -7%;
   width: 24vmin;
   height: 28vmin;
@@ -598,16 +598,16 @@ body.no-scroll main {
   animation-delay: 0.4s;
 }
 .scatter:nth-child(4) {
-  bottom: -6%;
-  right: -3%;
+  bottom: -1%;
+  right: 1%;
   width: 30vmin;
-  height: 24vmin;
+  height: 40vmin;
   transform: rotate(-6deg);
   animation-delay: 0.55s;
 }
 .scatter:nth-child(5) {
-  bottom: -8%;
-  left: 22%;
+  bottom: -1%;
+  left: 25%;
   width: 22vmin;
   height: 22vmin;
   transform: rotate(3deg);
@@ -632,12 +632,13 @@ body.no-scroll main {
   }
   .scatter:nth-child(4) {
     width: 36vmin;
-    height: 28vmin;
+    height: 50vmin;
+    bottom: -1%;
   }
   .scatter:nth-child(5) {
     width: 26vmin;
     height: 26vmin;
-    left: 30%;
+    left: 20%;
   }
 }
 

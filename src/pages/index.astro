@@ -3,6 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PhotoGrid from "../components/PhotoGrid.astro";
 import { parseImageGlob, interleaveArrays } from "../utils/parseImage.js";
 
+
+
+const home = parseImageGlob(
+  import.meta.glob("/src/images/home/*.{jpeg,jpg}", { eager: true }),
+);
 const arch = parseImageGlob(
   import.meta.glob("/src/images/architecture/*.{jpeg,jpg}", { eager: true }),
 );
@@ -13,12 +18,12 @@ const life = parseImageGlob(
   import.meta.glob("/src/images/life/*.{jpeg,jpg}", { eager: true }),
 );
 
-const images = interleaveArrays(arch, coffee, life);
+// const images = interleaveArrays(arch, coffee, life);
 ---
 
 <BaseLayout
   title="Portfolio · Fotografía de interiorismo y café de especialidad"
   description="Selección de trabajos de fotografía: interiorismo, café de especialidad y vida cotidiana."
 >
-  <PhotoGrid images={images} />
+  <PhotoGrid images={home} />
 </BaseLayout>
